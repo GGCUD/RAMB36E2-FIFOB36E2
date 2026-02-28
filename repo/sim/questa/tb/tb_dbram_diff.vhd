@@ -10,7 +10,7 @@ architecture tb of tb_dbram_diff is
   constant ADDR_WIDTH : integer := 10;
   constant DEPTH      : integer := 2**ADDR_WIDTH;
 
-  constant CYCLES : integer := 300; -- сколько тактов после directed
+  constant CYCLES : integer := 300;
 
   signal aclk    : std_logic := '0';
   signal aresetn : std_logic := '0';
@@ -167,11 +167,6 @@ begin
         write_b_i <= '0';
       end if;
 
-      -- избегает коллизии при записи
-      --if (a_addr = b_addr) and ((i mod 4 = 0) or (i mod 7 = 0)) then
-      --  b_addr := (b_addr + 1) mod DEPTH;
-      --end if;
-
       addr_a_i <= std_logic_vector(to_unsigned(a_addr, ADDR_WIDTH));
       addr_b_i <= std_logic_vector(to_unsigned(b_addr, ADDR_WIDTH));
 
@@ -195,22 +190,13 @@ begin
 
     if aresetn = '1' then
       assert slv_eq(dut_ra, ref_ra)
-        report "Mismatch A @cycle=" & integer'image(cyc) &
-               " addrA=" & slv_to_hex(addr_a_i) &
-               " wea=" & std_logic'image(write_a_i) &
-               " dinA=0x" & slv_to_hex(write_a_data_i) &
-               " dut=0x" & slv_to_hex(dut_ra) &
-               " ref=0x" & slv_to_hex(ref_ra)
+        report "Mismatch B: DUT=0x" & slv_to_hex(dut_rb) & " REF=0x" & slv_to_hex(ref_rb)
         severity failure;
 
       assert slv_eq(dut_rb, ref_rb)
-        report "Mismatch B @cycle=" & integer'image(cyc) &
-               " addrB=" & slv_to_hex(addr_b_i) &
-               " web=" & std_logic'image(write_b_i) &
-               " dinB=0x" & slv_to_hex(write_b_data_i) &
-               " dut=0x" & slv_to_hex(dut_rb) &
-               " ref=0x" & slv_to_hex(ref_rb)
+        report "Mismatch B: DUT=0x" & slv_to_hex(dut_rb) & " REF=0x" & slv_to_hex(ref_rb)
         severity failure;
+        
     end if;
   end process;
 
