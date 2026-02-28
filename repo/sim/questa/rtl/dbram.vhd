@@ -33,72 +33,37 @@ architecture rtl of dbram is
 
   attribute ram_style : string;
   attribute ram_style of ram : signal is "block";
-
-  function to_idx(a : std_logic_vector) return integer is
-  begin
-    return to_integer(unsigned(a));
-  end function;
-
-  constant SLV_X : std_logic_vector(DATA_WIDTH-1 downto 0) := (others => 'X');
+  signal ram_data_a, ram_data_b : std_logic_vector(DATA_WIDTH-1 downto 0);
 begin
 
+
   process(aclk)
-    variable ia, ib  : integer;
-    variable same_ab : boolean;
-    variable old_a   : std_logic_vector(DATA_WIDTH-1 downto 0);
-    variable old_b   : std_logic_vector(DATA_WIDTH-1 downto 0);
-    variable out_a   : std_logic_vector(DATA_WIDTH-1 downto 0);
-    variable out_b   : std_logic_vector(DATA_WIDTH-1 downto 0);
   begin
     if rising_edge(aclk) then
       if aresetn = '0' then
-        read_a_data_o <= (others => '0');
-        read_b_data_o <= (others => '0');
+        ram_data_a <= (others => '0');
+        ram_data_b <= (others => '0');
       else
-        ia := to_idx(addr_a_i);
-        ib := to_idx(addr_b_i);
-        same_ab := (ia = ib);
-
-        -- синхронное чтение: что было в RAM на этот такт
-        old_a := ram(ia);
-        old_b := ram(ib);
-
-        out_a := old_a;
-        out_b := old_b;
-
-        -- WRITE_FIRST, при конфликте write/write на один адрес — приоритет B
-        if (write_a_i = '1') and not (write_b_i = '1' and same_ab) then
-          ram(ia) <= write_a_data_i;
-          out_a   := write_a_data_i;
+        -- Port A
+        if write_a_i = '1' then
+          ram(to_integer(unsigned(addr_a_i))) <= write_a_data_i;
+          ram_data_a <= write_a_data_i;  -- WRITE_FIRST
+        else
+          ram_data_a <= ram(to_integer(unsigned(addr_a_i)));
         end if;
 
-        if (write_b_i = '1') then
-          ram(ib) <= write_b_data_i;
-          out_b   := write_b_data_i;
-          if (write_a_i = '1') and same_ab then
-            out_a := write_b_data_i;
-          end if;
+        -- Port B
+        if write_b_i = '1' then
+          ram(to_integer(unsigned(addr_b_i))) <= write_b_data_i;
+          ram_data_b <= write_b_data_i;  -- WRITE_FIRST
+        else
+          ram_data_b <= ram(to_integer(unsigned(addr_b_i)));
         end if;
-
-        -- Коллизии как у сим-модели BRAM (X на выходах/памяти)
-        -- synthesis translate_off
-        if same_ab then
-          if (write_a_i = '1' and write_b_i = '1') then
-            -- как в unisim память (X), но выходы НЕ обязательно X
-            ram(ia) <= SLV_X;
-          
-          elsif (write_a_i = '1' and write_b_i = '0') then
-            out_b := SLV_X; -- A пишет, B читает тот же адрес
-          
-          elsif (write_a_i = '0' and write_b_i = '1') then
-            out_a := SLV_X; -- B пишет, A читает тот же адрес
-          end if;
-        end if;
-        -- synthesis translate_on
-        read_a_data_o <= out_a;
-        read_b_data_o <= out_b;
       end if;
     end if;
   end process;
+  
+  read_a_data_o <= ram_data_a;
+  read_b_data_o <= ram_data_b;
 
 end architecture;

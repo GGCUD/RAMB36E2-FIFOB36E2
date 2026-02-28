@@ -1,7 +1,6 @@
 quietly WaveActivateNextPane {} 0
 quietly delete wave *
 
-add wave -divider "TB"
 add wave -radix hex sim:/tb_dbram_diff/aclk
 add wave -radix hex sim:/tb_dbram_diff/aresetn
 
@@ -13,9 +12,11 @@ add wave -radix hex sim:/tb_dbram_diff/write_b_i
 add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
 add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
 
-add wave -divider "Outputs: DUT vs REF"
+add wave -divider "Output A: DUT vs REF"
 add wave -radix hex sim:/tb_dbram_diff/dut_ra
 add wave -radix hex sim:/tb_dbram_diff/ref_ra
+
+add wave -divider "Output B: DUT vs REF"
 add wave -radix hex sim:/tb_dbram_diff/dut_rb
 add wave -radix hex sim:/tb_dbram_diff/ref_rb
 

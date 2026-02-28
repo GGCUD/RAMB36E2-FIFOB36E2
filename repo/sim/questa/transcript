@@ -30,7 +30,7 @@
 # vmap work work 
 # Modifying modelsim.ini
 # ** Error: മ
-# uᙷ᪭༻耀:\Orcad\toolᙱ᪫ၐ耀pice;E:\Orcaᙳ᪩ᅴ蠀橀Z
+# 
 #        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
 # 
 # optional library mapping
@@ -42,7 +42,7 @@
 # 
 # eval $VCOM [file join $root_dir rtl dbram.vhd]
 # QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 22:04:54 on Feb 24,2026
+# Start time: 18:18:47 on Feb 28,2026
 # vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/rtl/dbram.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -50,11 +50,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity dbram
 # -- Compiling architecture rtl of dbram
-# End time: 22:04:54 on Feb 24,2026, Elapsed time: 0:00:00
+# End time: 18:18:47 on Feb 28,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # eval $VCOM [file join $root_dir ref dbram_ref.vhd]
 # QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 22:04:55 on Feb 24,2026
+# Start time: 18:18:47 on Feb 28,2026
 # vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/ref/dbram_ref.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -62,11 +62,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity dbram_ref
 # -- Compiling architecture rtl of dbram_ref
-# End time: 22:04:55 on Feb 24,2026, Elapsed time: 0:00:00
+# End time: 18:18:48 on Feb 28,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # eval $VCOM [file join $root_dir tb  tb_dbram_diff.vhd]
 # QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
-# Start time: 22:04:55 on Feb 24,2026
+# Start time: 18:18:48 on Feb 28,2026
 # vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/tb/tb_dbram_diff.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -76,14 +76,14 @@
 # -- Compiling architecture tb of tb_dbram_diff
 # -- Loading entity dbram
 # -- Loading entity dbram_ref
-# End time: 22:04:56 on Feb 24,2026, Elapsed time: 0:00:01
+# End time: 18:18:48 on Feb 28,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # puts "=== COMPILE.DO END ==="
 # puts "=== COMPILE OK ==="
 # 
 # vsim -t 1ps -coverage -voptargs=+acc -L unisim work.tb_dbram_diff
 # vsim -t 1ps -coverage -voptargs="+acc" -L unisim work.tb_dbram_diff 
-# Start time: 22:04:56 on Feb 24,2026
+# Start time: 18:18:48 on Feb 28,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # Loading std.standard
 # Loading std.textio(body)
@@ -101,7 +101,6 @@
 # quietly WaveActivateNextPane {} 0
 # quietly delete wave *
 # 
-# add wave -divider "TB"
 # add wave -radix hex sim:/tb_dbram_diff/aclk
 # add wave -radix hex sim:/tb_dbram_diff/aresetn
 # 
@@ -113,9 +112,11 @@
 # add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
 # add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
 # 
-# add wave -divider "Outputs: DUT vs REF"
+# add wave -divider "Output A: DUT vs REF"
 # add wave -radix hex sim:/tb_dbram_diff/dut_ra
 # add wave -radix hex sim:/tb_dbram_diff/ref_ra
+# 
+# add wave -divider "Output B: DUT vs REF"
 # add wave -radix hex sim:/tb_dbram_diff/dut_rb
 # add wave -radix hex sim:/tb_dbram_diff/ref_rb
 # 
@@ -124,16 +125,531 @@
 # configure wave -timelineunits ns
 # update
 # run 20 us
-# ** Note: DONE
-#    Time: 5236 ns  Iteration: 0  Instance: /tb_dbram_diff
+# ** Note: TB PASS
+#    Time: 3536 ns  Iteration: 0  Instance: /tb_dbram_diff
 # 
 # puts "=== SIM DONE (GUI) ==="
-coverage report -output report.txt -srcfile=* -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-coverage report -output report.txt -srcfile=* -detail -all -dump -annotate -option -assert -directive -cvg -codeAll
-# End time: 23:07:49 on Feb 24,2026, Elapsed time: 1:02:53
+do do/simulate_gui.do
+# 
+# 
+# do do/compile.do
+# transcript on
+# onerror { quit -code 1 }
+# puts "=== COMPILE.DO START ==="
+# set root_dir [pwd]
+# E:/Xilinx_2022.2/repo/sim/questa
+# puts "level=[info level]"
+# 
+# if {[file exists work]} { vdel -all }
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is User@DESKTOP-2LFOIQA.
+# vlib work
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# vmap work work
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: മ
+# bꤔ࠻錀潭敤獬浩椮楮
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# 
+# optional library mapping
+# if {[info exists env(UNISIM_LIB)]} { catch { vmap unisim $env(UNISIM_LIB) } }
+# if {[info exists env(XPM_LIB)]}    { catch { vmap xpm    $env(XPM_LIB) } }
+# 
+# set VCOM "vcom -2002 -explicit -work work -cover sbceft"
+# vcom -2002 -explicit -work work -cover sbceft
+# 
+# eval $VCOM [file join $root_dir rtl dbram.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:25:06 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/rtl/dbram.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram
+# -- Compiling architecture rtl of dbram
+# End time: 18:25:06 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir ref dbram_ref.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:25:06 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/ref/dbram_ref.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram_ref
+# -- Compiling architecture rtl of dbram_ref
+# End time: 18:25:07 on Feb 28,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir tb  tb_dbram_diff.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:25:07 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/tb/tb_dbram_diff.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_dbram_diff
+# -- Compiling architecture tb of tb_dbram_diff
+# -- Loading entity dbram
+# -- Loading entity dbram_ref
+# End time: 18:25:07 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# puts "=== COMPILE.DO END ==="
+# puts "=== COMPILE OK ==="
+# 
+# vsim -t 1ps -coverage -voptargs=+acc -L unisim work.tb_dbram_diff
+# End time: 18:25:10 on Feb 28,2026, Elapsed time: 0:06:22
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -coverage -voptargs="+acc" -L unisim work.tb_dbram_diff 
+# Start time: 18:25:10 on Feb 28,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_dbram_diff(tb)#1
+# Loading work.dbram(rtl)#1
+# Loading work.dbram_ref(rtl)#1
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading unisim.vpkg(body)
+# Loading unisim.ramb36e2(ramb36e2_v)#1
+# do do/wave.do
+# quietly WaveActivateNextPane {} 0
+# quietly delete wave *
+# 
+# add wave -radix hex sim:/tb_dbram_diff/aclk
+# add wave -radix hex sim:/tb_dbram_diff/aresetn
+# 
+# add wave -divider "Inputs"
+# add wave -radix hex sim:/tb_dbram_diff/addr_a_i
+# add wave -radix hex sim:/tb_dbram_diff/addr_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
+# 
+# add wave -divider "Output A: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_ra
+# add wave -radix hex sim:/tb_dbram_diff/ref_ra
+# 
+# add wave -divider "Output B: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_rb
+# add wave -radix hex sim:/tb_dbram_diff/ref_rb
+# 
+# configure wave -namecolwidth 250
+# configure wave -valuecolwidth 160
+# configure wave -timelineunits ns
+# update
+# run 20 us
+# ** Note: TB PASS
+#    Time: 3535 ns  Iteration: 0  Instance: /tb_dbram_diff
+# 
+# puts "=== SIM DONE (GUI) ==="
+do do/simulate_gui.do
+# 
+# 
+# do do/compile.do
+# transcript on
+# onerror { quit -code 1 }
+# puts "=== COMPILE.DO START ==="
+# set root_dir [pwd]
+# E:/Xilinx_2022.2/repo/sim/questa
+# puts "level=[info level]"
+# 
+# if {[file exists work]} { vdel -all }
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is User@DESKTOP-2LFOIQA.
+# vlib work
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# vmap work work
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: മ
+# ;뜃拾⥜耀MaxRpcSize
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# 
+# optional library mapping
+# if {[info exists env(UNISIM_LIB)]} { catch { vmap unisim $env(UNISIM_LIB) } }
+# if {[info exists env(XPM_LIB)]}    { catch { vmap xpm    $env(XPM_LIB) } }
+# 
+# set VCOM "vcom -2002 -explicit -work work -cover sbceft"
+# vcom -2002 -explicit -work work -cover sbceft
+# 
+# eval $VCOM [file join $root_dir rtl dbram.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:45:33 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/rtl/dbram.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram
+# -- Compiling architecture rtl of dbram
+# End time: 18:45:33 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir ref dbram_ref.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:45:33 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/ref/dbram_ref.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram_ref
+# -- Compiling architecture rtl of dbram_ref
+# End time: 18:45:34 on Feb 28,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir tb  tb_dbram_diff.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 18:45:34 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/tb/tb_dbram_diff.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_dbram_diff
+# -- Compiling architecture tb of tb_dbram_diff
+# -- Loading entity dbram
+# -- Loading entity dbram_ref
+# End time: 18:45:34 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# puts "=== COMPILE.DO END ==="
+# puts "=== COMPILE OK ==="
+# 
+# vsim -t 1ps -coverage -voptargs=+acc -L unisim work.tb_dbram_diff
+# End time: 18:45:37 on Feb 28,2026, Elapsed time: 0:20:27
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -coverage -voptargs="+acc" -L unisim work.tb_dbram_diff 
+# Start time: 18:45:37 on Feb 28,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_dbram_diff(tb)#1
+# Loading work.dbram(rtl)#1
+# Loading work.dbram_ref(rtl)#1
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading unisim.vpkg(body)
+# Loading unisim.ramb36e2(ramb36e2_v)#1
+# do do/wave.do
+# quietly WaveActivateNextPane {} 0
+# quietly delete wave *
+# 
+# add wave -radix hex sim:/tb_dbram_diff/aclk
+# add wave -radix hex sim:/tb_dbram_diff/aresetn
+# 
+# add wave -divider "Inputs"
+# add wave -radix hex sim:/tb_dbram_diff/addr_a_i
+# add wave -radix hex sim:/tb_dbram_diff/addr_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
+# 
+# add wave -divider "Output A: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_ra
+# add wave -radix hex sim:/tb_dbram_diff/ref_ra
+# 
+# add wave -divider "Output B: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_rb
+# add wave -radix hex sim:/tb_dbram_diff/ref_rb
+# 
+# configure wave -namecolwidth 250
+# configure wave -valuecolwidth 160
+# configure wave -timelineunits ns
+# update
+# run 20 us
+# ** Note: TB PASS
+#    Time: 3535 ns  Iteration: 0  Instance: /tb_dbram_diff
+# 
+# puts "=== SIM DONE (GUI) ==="
+# Causality operation skipped due to absence of debug database file
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+# Error: invalid command name "::.main_pane.dataflow.interior.cs.body.pw.df.c"
+do do/simulate_gui.do
+# 
+# 
+# do do/compile.do
+# transcript on
+# onerror { quit -code 1 }
+# puts "=== COMPILE.DO START ==="
+# set root_dir [pwd]
+# E:/Xilinx_2022.2/repo/sim/questa
+# puts "level=[info level]"
+# 
+# if {[file exists work]} { vdel -all }
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is User@DESKTOP-2LFOIQA.
+# vlib work
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# vmap work work
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: മ
+# uⶨ瓇ቩ蠀훐\
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# 
+# optional library mapping
+# if {[info exists env(UNISIM_LIB)]} { catch { vmap unisim $env(UNISIM_LIB) } }
+# if {[info exists env(XPM_LIB)]}    { catch { vmap xpm    $env(XPM_LIB) } }
+# 
+# set VCOM "vcom -2002 -explicit -work work -cover sbceft"
+# vcom -2002 -explicit -work work -cover sbceft
+# 
+# eval $VCOM [file join $root_dir rtl dbram.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:22:15 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/rtl/dbram.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram
+# -- Compiling architecture rtl of dbram
+# End time: 19:22:15 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir ref dbram_ref.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:22:15 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/ref/dbram_ref.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram_ref
+# -- Compiling architecture rtl of dbram_ref
+# End time: 19:22:16 on Feb 28,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir tb  tb_dbram_diff.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:22:16 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/tb/tb_dbram_diff.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_dbram_diff
+# -- Compiling architecture tb of tb_dbram_diff
+# -- Loading entity dbram
+# -- Loading entity dbram_ref
+# End time: 19:22:16 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# puts "=== COMPILE.DO END ==="
+# puts "=== COMPILE OK ==="
+# 
+# vsim -t 1ps -coverage -voptargs=+acc -L unisim work.tb_dbram_diff
+# End time: 19:22:20 on Feb 28,2026, Elapsed time: 0:36:43
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -coverage -voptargs="+acc" -L unisim work.tb_dbram_diff 
+# Start time: 19:22:20 on Feb 28,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_dbram_diff(tb)#1
+# Loading work.dbram(rtl)#1
+# Loading work.dbram_ref(rtl)#1
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading unisim.vpkg(body)
+# Loading unisim.ramb36e2(ramb36e2_v)#1
+# do do/wave.do
+# quietly WaveActivateNextPane {} 0
+# quietly delete wave *
+# 
+# add wave -radix hex sim:/tb_dbram_diff/aclk
+# add wave -radix hex sim:/tb_dbram_diff/aresetn
+# 
+# add wave -divider "Inputs"
+# add wave -radix hex sim:/tb_dbram_diff/addr_a_i
+# add wave -radix hex sim:/tb_dbram_diff/addr_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
+# 
+# add wave -divider "Output A: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_ra
+# add wave -radix hex sim:/tb_dbram_diff/ref_ra
+# 
+# add wave -divider "Output B: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_rb
+# add wave -radix hex sim:/tb_dbram_diff/ref_rb
+# 
+# configure wave -namecolwidth 250
+# configure wave -valuecolwidth 160
+# configure wave -timelineunits ns
+# update
+# run 20 us
+# ** Note: TB PASS
+#    Time: 3535 ns  Iteration: 1  Instance: /tb_dbram_diff
+# 
+# puts "=== SIM DONE (GUI) ==="
+do do/simulate_gui.do
+# 
+# 
+# do do/compile.do
+# transcript on
+# onerror { quit -code 1 }
+# puts "=== COMPILE.DO START ==="
+# set root_dir [pwd]
+# E:/Xilinx_2022.2/repo/sim/questa
+# puts "level=[info level]"
+# 
+# if {[file exists work]} { vdel -all }
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is User@DESKTOP-2LFOIQA.
+# vlib work
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# vmap work work
+# QuestaSim-64 vmap 2021.1 Lib Mapping Utility 2021.01 Jan 19 2021
+# vmap work work 
+# Modifying modelsim.ini
+# ** Error: മ
+# sꫠ鋔⭳耀ru-RU
+#        Unable to replace existing ini file (modelsim.ini).  File can not be renamed.
+# 
+# optional library mapping
+# if {[info exists env(UNISIM_LIB)]} { catch { vmap unisim $env(UNISIM_LIB) } }
+# if {[info exists env(XPM_LIB)]}    { catch { vmap xpm    $env(XPM_LIB) } }
+# 
+# set VCOM "vcom -2002 -explicit -work work -cover sbceft"
+# vcom -2002 -explicit -work work -cover sbceft
+# 
+# eval $VCOM [file join $root_dir rtl dbram.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:23:46 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/rtl/dbram.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram
+# -- Compiling architecture rtl of dbram
+# End time: 19:23:46 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir ref dbram_ref.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:23:46 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/ref/dbram_ref.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity dbram_ref
+# -- Compiling architecture rtl of dbram_ref
+# End time: 19:23:47 on Feb 28,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# eval $VCOM [file join $root_dir tb  tb_dbram_diff.vhd]
+# QuestaSim-64 vcom 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:23:47 on Feb 28,2026
+# vcom -reportprogress 300 -2002 -explicit -work work -cover sbceft E:/Xilinx_2022.2/repo/sim/questa/tb/tb_dbram_diff.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_dbram_diff
+# -- Compiling architecture tb of tb_dbram_diff
+# -- Loading entity dbram
+# -- Loading entity dbram_ref
+# End time: 19:23:47 on Feb 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# puts "=== COMPILE.DO END ==="
+# puts "=== COMPILE OK ==="
+# 
+# vsim -t 1ps -coverage -voptargs=+acc -L unisim work.tb_dbram_diff
+# End time: 19:23:51 on Feb 28,2026, Elapsed time: 0:01:31
+# Errors: 0, Warnings: 0
+# vsim -t 1ps -coverage -voptargs="+acc" -L unisim work.tb_dbram_diff 
+# Start time: 19:23:51 on Feb 28,2026
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_dbram_diff(tb)#1
+# Loading work.dbram(rtl)#1
+# Loading work.dbram_ref(rtl)#1
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading unisim.vpkg(body)
+# Loading unisim.ramb36e2(ramb36e2_v)#1
+# do do/wave.do
+# quietly WaveActivateNextPane {} 0
+# quietly delete wave *
+# 
+# add wave -radix hex sim:/tb_dbram_diff/aclk
+# add wave -radix hex sim:/tb_dbram_diff/aresetn
+# 
+# add wave -divider "Inputs"
+# add wave -radix hex sim:/tb_dbram_diff/addr_a_i
+# add wave -radix hex sim:/tb_dbram_diff/addr_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_i
+# add wave -radix hex sim:/tb_dbram_diff/write_a_data_i
+# add wave -radix hex sim:/tb_dbram_diff/write_b_data_i
+# 
+# add wave -divider "Output A: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_ra
+# add wave -radix hex sim:/tb_dbram_diff/ref_ra
+# 
+# add wave -divider "Output B: DUT vs REF"
+# add wave -radix hex sim:/tb_dbram_diff/dut_rb
+# add wave -radix hex sim:/tb_dbram_diff/ref_rb
+# 
+# configure wave -namecolwidth 250
+# configure wave -valuecolwidth 160
+# configure wave -timelineunits ns
+# update
+# run 20 us
+# ** Note: TB PASS
+#    Time: 3540 ns  Iteration: 1  Instance: /tb_dbram_diff
+# 
+# puts "=== SIM DONE (GUI) ==="
+# End time: 19:26:51 on Feb 28,2026, Elapsed time: 0:03:00
 # Errors: 0, Warnings: 0
