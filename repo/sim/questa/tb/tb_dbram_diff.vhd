@@ -9,8 +9,7 @@ architecture tb of tb_dbram_diff is
   constant DATA_WIDTH : integer := 32;
   constant ADDR_WIDTH : integer := 10;
   constant DEPTH      : integer := 2**ADDR_WIDTH;
-
-  constant CYCLES : integer := 300;
+  constant CYCLES     : integer := 300;
 
   signal aclk    : std_logic := '0';
   signal aresetn : std_logic := '0';
@@ -30,37 +29,6 @@ architecture tb of tb_dbram_diff is
       if a(i) /= b(i) then return false; end if;
     end loop;
     return true;
-  end function;
-
-  function slv_to_hex(slv : std_logic_vector) return string is
-    constant N : integer := (slv'length + 3) / 4;
-    variable ext : std_logic_vector(N*4-1 downto 0) := (others => '0');
-    variable res : string(1 to N);
-    variable nib : std_logic_vector(3 downto 0);
-    variable v   : integer;
-    variable ok  : boolean;
-  begin
-    ext(slv'length-1 downto 0) := slv;
-
-    for k in 0 to N-1 loop
-      nib := ext((N-1-k)*4+3 downto (N-1-k)*4);
-      ok := true;
-      for i in 0 to 3 loop
-        if not (nib(i) = '0' or nib(i) = '1') then ok := false; end if;
-      end loop;
-      if not ok then
-        res(k+1) := 'X';
-      else
-        v := to_integer(unsigned(nib));
-        if v < 10 then
-          res(k+1) := character'val(character'pos('0') + v);
-        else
-          res(k+1) := character'val(character'pos('A') + (v-10));
-        end if;
-      end if;
-    end loop;
-
-    return res;
   end function;
 
   procedure tick is
@@ -99,7 +67,7 @@ begin
       write_a_data_i => write_a_data_i, write_b_data_i => write_b_data_i
     );
 
-  -- stimulus
+  -- stimuls
   stim : process
     variable i : integer;
     variable a_addr, b_addr : integer;
@@ -148,7 +116,7 @@ begin
       tick;
     end loop;
 
-    --адреса и данные от счётчика i
+    -- адреса и данные от i
     for i in 0 to CYCLES-1 loop
       drive_phase;
       a_addr := i mod DEPTH;
@@ -190,11 +158,11 @@ begin
 
     if aresetn = '1' then
       assert slv_eq(dut_ra, ref_ra)
-        report "Mismatch B: DUT=0x" & slv_to_hex(dut_rb) & " REF=0x" & slv_to_hex(ref_rb)
+        report "Mismatch A"
         severity failure;
 
       assert slv_eq(dut_rb, ref_rb)
-        report "Mismatch B: DUT=0x" & slv_to_hex(dut_rb) & " REF=0x" & slv_to_hex(ref_rb)
+        report "Mismatch B"
         severity failure;
         
     end if;
